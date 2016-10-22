@@ -1,0 +1,86 @@
+---
+title: "Uniform Distribution"
+author: "Eugene Politov"
+date: "October 21, 2016"
+output:
+  pdf_document:
+    latex_engine: lualatex
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Uniform Distribution
+# Равномерное распределение
+
+### Probability density function
+### Функция распределения
+
+Suppose $f(x)$ is the PDF of a continuous uniform distribution on the interval $[a,b]$. Since a uniform distribution requires that each value of the random variable
+be equally likely, $f(x)$ will be a constant function. Therefore, suppose
+$f(x)=c$ on the interval $[a,b]$. Since the definite integral of the PDF over the interval must be equal to 1, we can solve the equation $\int_a^b c \, \mathrm{d}x = 1$
+for $c$. Working with the integral, we have
+
+$\int_a^b c \, \mathrm{d}x = \left. cx \right|_a^b = c(b-a) = 1$ which gives $c = \dfrac{1}{b-a}$
+
+In other words, the PDF is $f(a ≤ x ≤ b) = \frac{1}{b-a}$
+
+
+### Cumulative distribution function
+###
+
+The CDF is simply the integral of the PDF.
+
+$\int_a^x \dfrac{1}{b-a} \mathrm{d}t = \left. \dfrac{1}{b-a} t \right|_a^x = \dfrac{x-a}{b-a}$
+
+$F(x)=\dfrac{x-a}{b-a}$
+
+### Moments
+
+#### Mean
+#### Математическое ожидание
+
+$E(X) = \int_a^b \dfrac{1}{b-a} x \, \mathrm{d}x = \left. \dfrac{1}{2(b-a)} x^2 \right|_a^b
+ = \dfrac{b^2-a^2}{2(b-a)} = \dfrac{(b-a)(b+a)}{2(b-a)} = \dfrac{a+b}{2}$
+
+$E(X) = \dfrac{a+b}{2}$
+
+#### Variance
+#### Дисперсия 
+
+$Var(X) = E(X^2) - (E(X))^2$
+
+$E(X^2) = \int_a^b \dfrac{1}{b-a} x^2 \mathrm{d}x =\left. \dfrac{1}{3(b-a)} x^3 \right|_a^b = \dfrac{b^3-a^3}{3(b-a)} = \dfrac{(b-a)(b^2+ab+a^2)}{3(b-a)} =  \dfrac{b^2+ab+a^2}{3}$
+
+$(E(X))^2 = \left(\dfrac{a+b}{2}\right)^2$
+ 
+$Var(X) = \dfrac{b^2+ab+a^2}{3} - \left( \dfrac{a+b}{2} \right)^2 =$ 
+
+$=\dfrac{b^2+ab+a^2}{3} - \dfrac{a^2+2ab+b^2}{4} =$
+
+$=\dfrac{4(b^2+ab+a^2)}{12} - \dfrac{3(a^2+2ab+b^2)}{12} =$
+
+$=\dfrac{4a^2+4ab+4b^2-3a^2-6ab-3b^2}{12}  =$
+
+$=\dfrac{a^2-2ab+b^2}{12}=\dfrac{b^2-2ab+a^2}{12} =$
+
+$=\dfrac{(b-a)^2}{12}$
+ 
+$Var(X) = \dfrac{(b-a)^2}{12}$
+
+#### Standard Deviation
+
+$\sigma_X = \dfrac{b-a}{\sqrt{12}}$
+
+
+```{r}
+#dunif(x, min = 0, max = 1, log = FALSE)
+#punif(q, min = 0, max = 1, lower.tail = TRUE, log.p = FALSE)
+#qunif(p, min = 0, max = 1, lower.tail = TRUE, log.p = FALSE)
+#runif(n, min = 0, max = 1)
+n <- floor(runif(1000)*10)
+t <- table(n)
+barplot(t)
+```
